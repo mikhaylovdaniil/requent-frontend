@@ -1,35 +1,78 @@
-@import './base.css';
+:root {
+    --bg-primary: #121417;
+    --bg-surface: #1a1d21;
+    --bg-surface-hover: #252a31;
+    --bg-surface-active: #0f1317;
+    --bg-elevated: #20242a;
+    --border: #2c3138;
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+    --text-primary: #e6eaf0;
+    --text-secondary: #a8b0bc;
+    --text-muted: #7a828e;
+
+    --accent: #5b8cff;
+    --accent-hover: #7aa2ff;
+    --accent-active: #3f6fe0;
+
+    --success: #3fb950;
+    --warning: #e3b341;
+    --error: #f85149;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+/* setting defaults css styles */
+
+/* Box sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+/* Remove default margin */
+* {
+    margin: 0;
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+/* Improve body defaults */
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
 }
+
+/* Remove list styles */
+ul,
+ol {
+    list-style: none;
+    padding: 0;
+}
+
+/* Remove link underline */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Remove button defaults */
+button {
+    background: none;
+    border: none;
+    font: inherit;
+    cursor: pointer;
+}
+
+/* Make images responsive */
+img,
+picture,
+video,
+canvas {
+    display: block;
+    max-width: 100%;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border-color: var(--border);
+}
+
+/* setting ends here */
