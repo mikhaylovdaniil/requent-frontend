@@ -1,13 +1,13 @@
 <script setup>
 import { RouterLink, useRoute } from "vue-router";
 import baseRoutes from "@/router/routes.js";
-import { capitalized } from "@/utils/strings";
+import { capitalized, isMenuItem } from "@/utils/strings";
 
-// TODO: filter that add  in navbar only marked routes (e.g. name="@Home")
-
-const routes = baseRoutes.map((route) => {
-    return { ...route, name: capitalized(route.name) };
-});
+const routes = baseRoutes
+    .filter((route) => isMenuItem(route.name))
+    .map((route) => {
+        return { ...route, name: capitalized(route.name.slice(1)) };
+    });
 
 const activeStyle = (route) => {
     const currentRoute = useRoute();

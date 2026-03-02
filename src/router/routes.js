@@ -9,8 +9,9 @@ const route = (path, name, component) => {
   };
 };
 
+/* Routes with '@' at start added to navbar item */
 const routes = [
-  route("/", "home", HomeView),
-  route("/notes", "notes", NotesView),
+  route("/", "@home", HomeView),
+  route("/notes", "@notes", NotesView),
 ];
 export default routes;
