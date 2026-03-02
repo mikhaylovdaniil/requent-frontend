@@ -6,13 +6,19 @@
     --bg-elevated: #20242a;
     --border: #2c3138;
 
+    --card-primary: #1a1d21;
+    --card-hover: #12161b;
+    --card-tag: #20242a;
+    --card-tag-hover: #252a31;
+
     --text-primary: #e6eaf0;
     --text-secondary: #a8b0bc;
     --text-muted: #7a828e;
 
-    --accent: #5b8cff;
+    --accent: #3f6fe0;
     --accent-hover: #7aa2ff;
-    --accent-active: #3f6fe0;
+    --accent-negative: #e03e3e;
+    --accent-active: #2c52b0;
 
     --success: #3fb950;
     --warning: #e3b341;
