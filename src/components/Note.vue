@@ -1,5 +1,12 @@
 <script setup>
-import { ref } from "vue";
+import { ref, defineProps } from "vue";
+
+defineProps({
+    isProgressable: {
+        type: Boolean,
+        default: false,
+    },
+});
 
 const tags = ref([
     { id: 1, label: "Math" },
@@ -28,7 +35,7 @@ const tags = ref([
                 {{ tag.label }}
             </button>
         </div>
-        <div class="progress">
+        <div v-if="isProgressable" class="progress">
             <div class="progress-fill" style="width: 69%"></div>
         </div>
 
@@ -83,7 +90,7 @@ const tags = ref([
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-
+    line-clamp: 3;
     font-size: 14px;
     line-height: 1.5;
     color: var(--text-secondary);

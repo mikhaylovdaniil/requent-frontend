@@ -7,7 +7,7 @@ import GoUp from "@/components/GoUp.vue";
         <GoUp />
         <Note />
         <Note />
-        <Note />
+        <Note :isProgressable="true" />
         <Note />
         <Note />
         <Note />
