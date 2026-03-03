@@ -1,0 +1,15 @@
+<template>
+    <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+    >
+        <path d="M3 10.5L12 3l9 7.5" />
+        <path d="M5 9.5V20h14V9.5" />
+    </svg>
+</template>

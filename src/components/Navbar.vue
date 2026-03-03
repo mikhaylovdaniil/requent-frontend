@@ -2,6 +2,8 @@
 import { RouterLink, useRoute } from "vue-router";
 import baseRoutes from "@/router/routes.js";
 import { capitalized, isMenuItem } from "@/utils/strings";
+import SvgHome from "@/assets/icons/svgHome.vue";
+import SvgNotes from "@/assets/icons/svgNotes.vue";
 
 const routes = baseRoutes
     .filter((route) => isMenuItem(route.name))
@@ -13,40 +15,93 @@ const activeStyle = (route) => {
     const currentRoute = useRoute();
     return currentRoute.path == route ? "navitem-active" : "";
 };
+
+const icons = {
+    Home: SvgHome,
+    Notes: SvgNotes,
+};
 </script>
 
 <template>
-    <div class="navbar">
-        <RouterLink v-for="route in routes" :to="route.path">
-            <button :class="`navitem ${activeStyle(route.path)}`">
-                {{ route.name }}
-            </button>
-        </RouterLink>
+    <div class="navbar-container">
+        <div class="navbar">
+            <div class="left">Requent</div>
+            <div class="right">
+                <RouterLink v-for="route in routes" :to="route.path">
+                    <button :class="`navitem ${activeStyle(route.path)}`">
+                        <component
+                            v-if="Object.hasOwn(icons, route.name)"
+                            :is="icons[route.name]"
+                        ></component>
+                        <span v-else>{{ route.name }}</span>
+                    </button>
+                </RouterLink>
+            </div>
+        </div>
     </div>
 </template>
 
 <style scooped>
-.navbar {
-    height: 50px;
+.navbar-container {
+    padding: 10px;
     width: 100%;
-    background-color: var(--bg-elevated);
+    height: 60px;
+    margin: 0 auto;
     display: flex;
+    justify-content: center;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Logo слева, кнопки справа */
     align-items: center;
-    padding: 0px 10px;
+
+    z-index: 100;
+    position: fixed;
+    height: 40px;
+    width: 100%;
+    background-color:
+        linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.04),
+            rgba(255, 255, 255, 0.01)
+        ),
+        rgba(32, 36, 42, 0.55);
+
+    padding: 0px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+
+    /* glassmorphism */
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.04),
+        0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+.right {
+    display: flex;
+    gap: 6px;
+    justify-content: flex-end;
 }
 
 .navitem {
-    height: 40px;
-    width: 100px;
-    background-color: var(--bg-surface);
-    margin-right: 5px;
-    border-radius: 5px;
     display: flex;
+
+    height: 36px;
+    width: 36px;
+    background-color: var(--bg-surface);
+    border-radius: 20px;
     justify-content: center;
     align-items: center;
-    border: none;
     border: 1px solid var(--border);
     color: white;
+
+    font-size: 14px;
 }
 
 .navitem:hover {

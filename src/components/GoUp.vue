@@ -31,7 +31,7 @@ onUnmounted(() => {
     </transition>
 </template>
 
-<style>
+<style scooped>
 .scroll-top-btn {
     position: fixed;
     right: 24px;
