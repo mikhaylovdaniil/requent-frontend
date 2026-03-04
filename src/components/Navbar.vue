@@ -25,18 +25,15 @@ const icons = {
 <template>
     <div class="navbar-container">
         <div class="navbar">
-            <div class="left">Requent</div>
-            <div class="right">
-                <RouterLink v-for="route in routes" :to="route.path">
-                    <button :class="`navitem ${activeStyle(route.path)}`">
-                        <component
-                            v-if="Object.hasOwn(icons, route.name)"
-                            :is="icons[route.name]"
-                        ></component>
-                        <span v-else>{{ route.name }}</span>
-                    </button>
-                </RouterLink>
-            </div>
+            <RouterLink v-for="route in routes" :to="route.path">
+                <button :class="`navitem ${activeStyle(route.path)}`">
+                    <component
+                        v-if="Object.hasOwn(icons, route.name)"
+                        :is="icons[route.name]"
+                    ></component>
+                    <span v-else>{{ route.name }}</span>
+                </button>
+            </RouterLink>
         </div>
     </div>
 </template>
@@ -52,8 +49,9 @@ const icons = {
 }
 .navbar {
     display: flex;
-    justify-content: space-between; /* Logo слева, кнопки справа */
+    justify-content: center; /* Logo слева, кнопки справа */
     align-items: center;
+    gap: 6px;
 
     z-index: 100;
     position: fixed;
@@ -68,7 +66,7 @@ const icons = {
         rgba(32, 36, 42, 0.55);
 
     padding: 0px 20px;
-    max-width: 1000px;
+    max-width: 730px;
     margin: 0 auto;
 
     border: 1px solid rgba(255, 255, 255, 0.06);
@@ -81,12 +79,6 @@ const icons = {
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.04),
         0 12px 32px rgba(0, 0, 0, 0.45);
-}
-
-.right {
-    display: flex;
-    gap: 6px;
-    justify-content: flex-end;
 }
 
 .navitem {

@@ -1,30 +1,30 @@
 <script setup>
 import Note from "@/components/Note.vue";
 import GoUp from "@/components/GoUp.vue";
+import { onMounted, ref } from "vue";
+
+const notes = ref([]);
+const isLoading = ref(true);
+
+onMounted(async () => {
+    try {
+        const response = await fetch("http://localhost:3000/notes/");
+        notes.value = await response.json();
+        notes.value = notes.value.map((note) => ({
+            ...note,
+            tags: note.tags.split(","),
+        }));
+    } catch (err) {
+        console.log(`Error while getting notes: ${err}`);
+    } finally {
+        isLoading.value = false;
+    }
+});
 </script>
 <template>
     <div class="notes-list">
         <GoUp />
-        <Note />
-        <Note />
-        <Note :isProgressable="true" />
-        <Note />
-        <Note />
-        <Note />
-        <Note />
-        <Note />
-        <Note />
-        <Note />
-        <Note />
-        <Note />
-        <Note />
-        <Note />
-        <Note />
-        <Note />
-        <Note />
-        <Note />
-        <Note />
-        <Note />
+        <Note v-for="note in notes" :note="note" />
     </div>
 </template>
 

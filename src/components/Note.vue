@@ -1,42 +1,30 @@
 <script setup>
-import { ref, defineProps } from "vue";
+import { defineProps } from "vue";
 
 defineProps({
-    isProgressable: {
-        type: Boolean,
-        default: false,
+    note: {
+        type: Object,
+        default: {},
     },
 });
-
-const tags = ref([
-    { id: 1, label: "Math" },
-    { id: 2, label: "C++" },
-    { id: 3, label: "Python" },
-    { id: 4, label: "Physics" },
-]);
 </script>
 <template>
     <div class="container">
-        <p class="title">Title</p>
-        <p class="metadata">Mark • Data</p>
+        <p class="title">{{ note.title }}</p>
+        <p class="metadata">{{ note.created_at }}</p>
         <p class="description">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
+            {{ note.description }}
         </p>
         <div class="tags">
-            <button v-for="(tag, index) in tags" :key="tag.id" class="tag">
-                {{ tag.label }}
+            <button v-for="(tag, index) in note.tags" :key="tag" class="tag">
+                {{ tag }}
             </button>
         </div>
-        <div v-if="isProgressable" class="progress">
-            <div class="progress-fill" style="width: 69%"></div>
+        <div class="progress">
+            <div
+                class="progress-fill"
+                :style="{ width: note.progress + '%' }"
+            ></div>
         </div>
 
         <div class="card-actions">
