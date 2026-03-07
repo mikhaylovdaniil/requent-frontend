@@ -1,12 +1,37 @@
 <script setup>
-import { defineProps } from "vue";
+import { defineProps, computed } from "vue";
+import { useNotesStore } from "@/stores/notes.js";
 
-defineProps({
+const notesStore = useNotesStore();
+
+const props = defineProps({
     note: {
         type: Object,
         default: {},
     },
 });
+
+const handleComplete = async () => {
+    try {
+        const response = await fetch(`api/notes/${props.note.id}/complete`, {
+            method: "PUT",
+        });
+        if (response.ok) props.note.progress = (await response.json()).progress;
+    } catch (err) {
+        console.log("Error while completing note: " + err);
+    }
+};
+
+const handleDelete = async () => {
+    try {
+        const response = await fetch(`api/notes/${props.note.id}`, {
+            method: "DELETE",
+        });
+        if (response.ok) notesStore.deleteNote(props.note);
+    } catch (err) {
+        console.log("Error while deleting note: " + err);
+    }
+};
 </script>
 <template>
     <div class="container">
@@ -28,8 +53,10 @@ defineProps({
         </div>
 
         <div class="card-actions">
-            <button class="btn-complete">Complete</button>
-            <button class="btn-delete">Delete</button>
+            <button class="btn-complete" @click="handleComplete">
+                Complete
+            </button>
+            <button class="btn-delete" @click="handleDelete">Delete</button>
         </div>
     </div>
 </template>

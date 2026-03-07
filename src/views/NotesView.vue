@@ -1,14 +1,17 @@
 <script setup>
 import Note from "@/components/Note.vue";
 import GoUp from "@/components/GoUp.vue";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
+import { useNotesStore } from "@/stores/notes.js";
+import { storeToRefs } from "pinia";
 
-const notes = ref([]);
+const notesStore = useNotesStore();
+const { notes } = storeToRefs(notesStore);
 const isLoading = ref(true);
 
 onMounted(async () => {
     try {
-        const response = await fetch("http://localhost:3000/notes/");
+        const response = await fetch("api/notes/");
         notes.value = await response.json();
         notes.value = notes.value.map((note) => ({
             ...note,
