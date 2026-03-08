@@ -27,7 +27,7 @@ onMounted(async () => {
 <template>
     <div class="notes-list">
         <GoUp />
-        <Note v-for="note in notes" :note="note" />
+        <Note v-for="note in notes" :note="note" :key="note.id" />
     </div>
 </template>
 

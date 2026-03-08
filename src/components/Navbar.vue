@@ -2,8 +2,11 @@
 import { RouterLink, useRoute } from "vue-router";
 import baseRoutes from "@/router/routes.js";
 import { capitalized, isMenuItem } from "@/utils/strings";
+import AddNoteModal from "./AddNoteModal.vue";
+
 import SvgHome from "@/assets/icons/svgHome.vue";
 import SvgNotes from "@/assets/icons/svgNotes.vue";
+import { useModals } from "@/stores/modals";
 
 const routes = baseRoutes
     .filter((route) => isMenuItem(route.name))
@@ -16,6 +19,10 @@ const activeStyle = (route) => {
     return currentRoute.path == route ? "navitem-active" : "";
 };
 
+const modals = useModals();
+const handleCreate = () => {
+    modals.createNote = true;
+};
 const icons = {
     Home: SvgHome,
     Notes: SvgNotes,
@@ -34,8 +41,12 @@ const icons = {
                     <span v-else>{{ route.name }}</span>
                 </button>
             </RouterLink>
+            <button class="navitem squared" @click="handleCreate">
+                New Note
+            </button>
         </div>
     </div>
+    <AddNoteModal v-if="modals.createNote" />
 </template>
 
 <style scooped>
@@ -94,6 +105,12 @@ const icons = {
     color: white;
 
     font-size: 14px;
+}
+
+.squared {
+    width: 100px;
+    height: 36px;
+    border-radius: 15px;
 }
 
 .navitem:hover {
